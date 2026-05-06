@@ -1,0 +1,1 @@
+python vit_explain.py --image_path "D:\pvzHE\test.jpg" --head_fusion mean --discard_ratio 0.9 
