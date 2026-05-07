@@ -90,12 +90,13 @@ def main():
         stem = image_path.stem
         mode_name = args.query_mode
         out_name = f"{stem}_qwen2vl_attn_{mode_name}_{args.head_fusion}_L{args.last_n_layers}.png"
-        out_path = image_path.parent / out_name
+        out_path = Path.cwd() / out_name
     else:
         out_path = Path(args.output)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
 
     cv2.imwrite(str(out_path), cam)
-    cv2.imwrite(str(image_path.parent / "input_qwen2vl.png"), np_img)
+    cv2.imwrite(str(Path.cwd() / "input_qwen2vl.png"), np_img)
 
     print("完成 Qwen2-VL attention 可视化")
     print(f"- 输出文件: {out_path}")
