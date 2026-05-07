@@ -1,1 +1,1 @@
-python vit_explain.py --image_path "D:\pvzHE\test.jpg" --head_fusion mean --discard_ratio 0.9 
+python qwen2vl_explain.py --image_path "./photoes/R.jpg" --prompt "图中最显著的目标是什么？" --query_mode last --head_fusion mean --last_n_layers 4

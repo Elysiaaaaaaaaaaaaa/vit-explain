@@ -38,6 +38,34 @@ python vit_explain.py --image_path <image path> --head_fusion <mean, min or max>
 If category_index isn't specified, Attention Rollout will be used,
 otherwise Gradient Attention Rollout will be used.
 
+### Qwen2-VL-2B text-to-image attention visualization
+
+This repo now also includes a script for Qwen2-VL attention visualization:
+
+```
+python qwen2vl_explain.py \
+  --image_path "./photoes/R.jpg" \
+  --prompt "图中最显著的目标是什么？" \
+  --query_mode last \
+  --head_fusion mean \
+  --last_n_layers 4
+```
+
+Main arguments:
+- `--query_mode`: `last` / `keyword` / `generated`
+- `--keyword`: required when `--query_mode keyword`
+- `--rollout`: optional rollout-style layer composition
+- `--min_pixels` and `--max_pixels`: controls image token count for memory usage
+
+Recommended dependencies:
+```
+pip install "transformers>=4.45.0" accelerate qwen-vl-utils
+```
+
+Notes:
+- The script uses `attn_implementation="eager"` to ensure attention weights are returned.
+- For cloud runtime (e.g. Kaggle GPU), first run will download model weights from HuggingFace.
+
 Notice that by default, this uses the 'Tiny' model from [Training data-efficient image transformers & distillation through attention](https://arxiv.org/abs/2012.12877)
  hosted on torch hub.
 
