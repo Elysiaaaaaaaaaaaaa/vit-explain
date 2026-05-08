@@ -131,7 +131,7 @@ class Qwen2VLAttentionExtractor:
             with torch.no_grad():
                 gen_out = self.model.generate(
                     **gen_inputs,
-                    max_new_tokens=128,
+                    max_new_tokens=1,
                     do_sample=False,
                     output_attentions=True,
                     return_dict_in_generate=True,
