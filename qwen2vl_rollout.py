@@ -31,7 +31,7 @@ class Qwen2VLAttentionExtractor:
         max_pixels: int = 512 * 28 * 28,
     ) -> None:
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
-        self.dtype = torch.float16 if self.device == "cuda" else torch.float32
+        self.dtype = torch.float32
         self.model_name = model_name
         self.processor = AutoProcessor.from_pretrained(
             model_name, min_pixels=min_pixels, max_pixels=max_pixels
