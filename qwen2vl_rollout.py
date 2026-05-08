@@ -145,7 +145,7 @@ class Qwen2VLAttentionExtractor:
             text = self.processor.tokenizer.decode(
                 seq[inputs["input_ids"].shape[1] :], skip_special_tokens=True
             )
-            return query_idx, token, gen_out.attentions[0], text
+            return query_idx, token, gen_out.attentions[-1], text
 
         raise ValueError(f"不支持的 query_mode: {mode}")
 
@@ -272,6 +272,7 @@ class Qwen2VLAttentionExtractor:
                 )
 
         mask = row.reshape(grid_h, grid_w).detach().cpu().numpy()
+        print(f"[mask] max={np.max(mask):.6f}, min={np.min(mask):.6f}, mean={np.mean(mask):.6f}")
         denom = float(np.max(mask))
         if denom <= 0:
             denom = 1.0
