@@ -33,9 +33,14 @@ python qwen2vl_explain.py \
 
 Or just `run.bat` (same command). Main args: `--query_mode` (`last`/`keyword`/`generated`), `--keyword` (required with `keyword` mode), `--rollout` (optional rollout-style layer composition), `--min_pixels`/`--max_pixels` (control image token budget).
 
-## Critical model loading quirk
+## Critical model loading quirks
 
-`Qwen2VLAttentionExtractor` **must** load with `attn_implementation="eager"` or attention weights won't be returned. This is hardcoded in `qwen2vl_rollout.py:42`.
+1. `Qwen2VLAttentionExtractor` **must** load with `attn_implementation="eager"` or attention weights won't be returned. Hardcoded in `qwen2vl_rollout.py:42`.
+2. **dtype 必须为 `torch.float32`**（`qwen2vl_rollout.py:34`）。eager attention 在 float16 下数值不稳定，大量 visual token 会导致 softmax 下溢 → 模型输出乱码。已硬编码为 float32（不再根据 GPU/CPU 条件切换）。
+
+## generated 模式注意事项
+
+`generated` 模式使用 `gen_out.attentions[-1]`（最后一个生成步）提取 attention（`qwen2vl_rollout.py:148`）。第一步 attention 模型尚未聚焦图像，热力图会平坦无区分度。若需调试，`qwen2vl_rollout.py:275` 有 `[mask]` 日志输出 max/min/mean。
 
 ## Dependencies
 

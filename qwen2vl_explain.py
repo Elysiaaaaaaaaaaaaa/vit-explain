@@ -78,7 +78,7 @@ def main():
         keyword=args.keyword,
         head_fusion=args.head_fusion,
         last_n_layers=args.last_n_layers,
-        rollout=args.rollout,
+        rollout=True,
     )
 
     img_rgb = Image.open(image_path).convert("RGB")
