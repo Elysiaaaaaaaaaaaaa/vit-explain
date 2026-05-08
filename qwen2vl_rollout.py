@@ -39,7 +39,7 @@ class Qwen2VLAttentionExtractor:
         self.model = Qwen2VLForConditionalGeneration.from_pretrained(
             model_name,
             torch_dtype=self.dtype,
-            attn_implementation="eager",
+            #attn_implementation="eager",
         ).to(self.device)
         self.model.eval()
 
@@ -232,7 +232,16 @@ class Qwen2VLAttentionExtractor:
         )
 
         print("[model output]"+generated_text)
-        print("[attention_shape]", gen_attn.shape)
+        print("[gen_attn type]", type(gen_attn))
+        print("[gen_attn len]", len(gen_attn))
+        if isinstance(gen_attn, tuple) and len(gen_attn) > 0:
+            print("[num_layers]", len(gen_attn))
+            print("[gen_attn[0] type]", type(gen_attn[0]))
+            if isinstance(gen_attn[0], tuple) and len(gen_attn[0]) > 0:
+                print("[steps_per_layer]", len(gen_attn[0]))
+                step = gen_attn[0][-1]
+                print("[gen_attn[0][last_step] shape]", step.shape)
+                print("[gen_attn[0][last_step]", step)
 
         if query_mode == "generated":
             row = self._extract_row_from_generate_attn(
