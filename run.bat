@@ -1,1 +1,1 @@
-python qwen2vl_explain.py --image_path "./photoes/R.jpg" --prompt "图中最显著的目标是什么？" --query_mode last --head_fusion mean --last_n_layers 4
+python qwen2vl_explain.py --image_path "./photoes/dog.jpg" --prompt "图中最显著的目标是什么？" --query_mode last --head_fusion mean --last_n_layers 4

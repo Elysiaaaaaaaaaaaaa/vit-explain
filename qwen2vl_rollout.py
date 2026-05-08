@@ -131,7 +131,7 @@ class Qwen2VLAttentionExtractor:
             with torch.no_grad():
                 gen_out = self.model.generate(
                     **gen_inputs,
-                    max_new_tokens=1,
+                    max_new_tokens=128,
                     do_sample=False,
                     output_attentions=True,
                     return_dict_in_generate=True,
@@ -230,6 +230,9 @@ class Qwen2VLAttentionExtractor:
             keyword=keyword,
             image_span=image_span,
         )
+
+        print("[model output]"+generated_text)
+        print("[attention_shape]", gen_attn.shape)
 
         if query_mode == "generated":
             row = self._extract_row_from_generate_attn(

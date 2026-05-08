@@ -2,3 +2,4 @@ attention_rollout_0.900_max.png
 attention_rollout_0.900_mean.png
 input.png
 __pycache__/
+.sisyphus/
