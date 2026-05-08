@@ -2,7 +2,7 @@
 please chat with user in chinese
 ## Two separate workflows (no shared entrypoint)
 
-- **DeiT (ViT) attention rollout** — `vit_explain.py` (CLI), driven by `vit_rollout.py` + `vit_grad_rollout.py`
+- **DeiT (ViT) attention rollout** — `vit_explain.py` (CLI), driven by `vit_rollout.py` + `vit_grad_rollout.py` 现在暂时不需要管这条链路。
 - **Qwen2-VL attention visualization** — `qwen2vl_explain.py` (CLI), driven by `qwen2vl_rollout.py`
 
 ## 运行说明

@@ -39,7 +39,7 @@ class Qwen2VLAttentionExtractor:
         self.model = Qwen2VLForConditionalGeneration.from_pretrained(
             model_name,
             torch_dtype=self.dtype,
-            #attn_implementation="eager",
+            attn_implementation="eager",
         ).to(self.device)
         self.model.eval()
 
