@@ -217,7 +217,7 @@ class Qwen2VLAttentionExtractor:
         keyword: Optional[str] = None,
         head_fusion: str = "mean",
         last_n_layers: int = 4,
-        rollout: bool = False,
+        rollout: bool = True,
     ) -> Tuple[np.ndarray, AttentionMeta]:
         inputs = self._prepare_inputs(image_path=image_path, prompt=prompt)
         image_token_id = int(self.model.config.image_token_id)
